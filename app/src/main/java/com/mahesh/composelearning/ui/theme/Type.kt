@@ -1,4 +1,4 @@
-package com.mahesh.composelearning.ui.theme
+package com.mahesh.myapplication.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

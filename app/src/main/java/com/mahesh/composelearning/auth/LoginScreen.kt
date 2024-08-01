@@ -1,4 +1,4 @@
-package com.mahesh.composelearning.screens
+package com.mahesh.composelearning.auth
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,46 +23,39 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.mahesh.composelearning.routes.BottomNavGraph
+import com.mahesh.composelearning.screens.BottomBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingScreen(navController: NavController){
+fun LoginScreen(navController: NavController){
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text(text = "Home") },
-                navigationIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(imageVector = Icons.Default.Menu, contentDescription = "Home Menu Icon")
-                    }
-                },
-                actions = {
-                    IconButton(onClick = {}) {
-                        Icon(imageVector = Icons.Default.Search , contentDescription = "Search Here")
-                    }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(imageVector = Icons.Default.Info, contentDescription = "Info")
+            CenterAlignedTopAppBar(
+                title = { Text(text = "LogIn") },
 
-                    }
-                })
+                )
         },
-        bottomBar = {
-            BottomBar(navController = navController)
-        }
     ) { paddingValue ->
-        Column(modifier = Modifier.fillMaxSize().padding(paddingValue),
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValue),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally ) {
-            Text(text = "Setting")
-
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = "Login")
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedButton(onClick = {
-                navController.navigate(route = "auth"){
-                    popUpTo("main"){
+                navController.navigate(route = "main"){
+                    popUpTo("auth"){
                         inclusive = true
                     }
                 }}) {
-                Text(text = "Log Out")
+                Text(text = "Login")
             }
-
+            Spacer(modifier = Modifier.height(16.dp))
+            OutlinedButton(onClick = { navController.navigate(route = "register")}) {
+                Text(text = "Register")
+            }
         }    }
+
 }

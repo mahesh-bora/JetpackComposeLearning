@@ -1,37 +1,39 @@
-package com.mahesh.composelearning.screens
+package com.mahesh.composelearning.product
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.mahesh.composelearning.screens.BottomBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingScreen(navController: NavController){
+fun ProductDetailScreen(navController: NavController, productId : Int){
+    val canNavigateBack = navController.previousBackStackEntry != null
+
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text(text = "Home") },
+            TopAppBar(title = { Text(text = "Product Detail") },
                 navigationIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(imageVector = Icons.Default.Menu, contentDescription = "Home Menu Icon")
+                    if(canNavigateBack){
+                        IconButton(onClick = { navController.navigateUp()}) {
+                            Icon(imageVector = Icons.Filled.ArrowBack , contentDescription = "back")
+                        }
                     }
                 },
                 actions = {
@@ -44,24 +46,12 @@ fun SettingScreen(navController: NavController){
                     }
                 })
         },
-        bottomBar = {
-            BottomBar(navController = navController)
-        }
     ) { paddingValue ->
         Column(modifier = Modifier.fillMaxSize().padding(paddingValue),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally ) {
-            Text(text = "Setting")
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = "Product Detail")
 
-            Spacer(modifier = Modifier.height(16.dp))
-            OutlinedButton(onClick = {
-                navController.navigate(route = "auth"){
-                    popUpTo("main"){
-                        inclusive = true
-                    }
-                }}) {
-                Text(text = "Log Out")
-            }
-
+            Text(text = "Product ID: $productId")
         }    }
 }

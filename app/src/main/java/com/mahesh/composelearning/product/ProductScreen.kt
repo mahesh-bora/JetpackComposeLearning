@@ -1,4 +1,4 @@
-package com.mahesh.composelearning.screens
+package com.mahesh.composelearning.product
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,13 +22,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.mahesh.composelearning.screens.BottomBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingScreen(navController: NavController){
+fun ProductScreen(navController: NavController){
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text(text = "Home") },
+            TopAppBar(title = { Text(text = "Product") },
                 navigationIcon = {
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(imageVector = Icons.Default.Menu, contentDescription = "Home Menu Icon")
@@ -48,20 +49,17 @@ fun SettingScreen(navController: NavController){
             BottomBar(navController = navController)
         }
     ) { paddingValue ->
-        Column(modifier = Modifier.fillMaxSize().padding(paddingValue),
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValue),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally ) {
-            Text(text = "Setting")
-
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = "Product ")
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedButton(onClick = {
-                navController.navigate(route = "auth"){
-                    popUpTo("main"){
-                        inclusive = true
-                    }
-                }}) {
-                Text(text = "Log Out")
+                navController. navigate("product_detail/10")
+            }) {
+                Text(text = "Product Detail")
             }
-
         }    }
 }
