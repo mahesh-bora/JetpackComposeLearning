@@ -21,47 +21,61 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.mahesh.composelearning.ui.theme.AppTheme
+import com.mahesh.composelearning.viewmodel.SettingViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingScreen(navController: NavController){
-    Scaffold(
-        topBar = {
-            TopAppBar(title = { Text(text = "Home") },
-                navigationIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(imageVector = Icons.Default.Menu, contentDescription = "Home Menu Icon")
-                    }
-                },
-                actions = {
-                    IconButton(onClick = {}) {
-                        Icon(imageVector = Icons.Default.Search , contentDescription = "Search Here")
-                    }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(imageVector = Icons.Default.Info, contentDescription = "Info")
+fun SettingScreen(navController: NavController, viewModel: SettingViewModel){
+    AppTheme(viewModel.theme == "dark") {
+        Scaffold(
+            topBar = {
+                TopAppBar(title = { Text(text = "Home") },
+                    navigationIcon = {
+                        IconButton(onClick = { /*TODO*/ }) {
+                            Icon(imageVector = Icons.Default.Menu, contentDescription = "Home Menu Icon")
+                        }
+                    },
+                    actions = {
+                        IconButton(onClick = {}) {
+                            Icon(imageVector = Icons.Default.Search , contentDescription = "Search Here")
+                        }
+                        IconButton(onClick = { /*TODO*/ }) {
+                            Icon(imageVector = Icons.Default.Info, contentDescription = "Info")
 
-                    }
-                })
-        },
-        bottomBar = {
-            BottomBar(navController = navController)
-        }
-    ) { paddingValue ->
-        Column(modifier = Modifier.fillMaxSize().padding(paddingValue),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally ) {
-            Text(text = "Setting")
-
-            Spacer(modifier = Modifier.height(16.dp))
-            OutlinedButton(onClick = {
-                navController.navigate(route = "auth"){
-                    popUpTo("main"){
-                        inclusive = true
-                    }
-                }}) {
-                Text(text = "Log Out")
+                        }
+                    })
+            },
+            bottomBar = {
+                BottomBar(navController = navController)
             }
+        ) { paddingValue ->
+            Column(modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValue),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally ) {
+                Text(text = "Setting")
 
-        }    }
+                Spacer(modifier = Modifier.height(16.dp))
+                OutlinedButton(onClick = {
+                    navController.navigate(route = "auth"){
+                        popUpTo("main"){
+                            inclusive = true
+                        }
+                    }}) {
+                    Text(text = "Log Out")
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+                OutlinedButton(onClick = {
+                    viewModel.changeTheme()
+                }) {
+                    Text(text = "Change Theme")
+                }
+            }    }
+    }
+
 }

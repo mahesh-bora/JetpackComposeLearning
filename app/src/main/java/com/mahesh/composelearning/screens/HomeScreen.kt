@@ -1,15 +1,23 @@
 package com.mahesh.composelearning.screens
 
+import android.graphics.Paint.Style
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
@@ -24,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.mahesh.composelearning.routes.BottomNavGraph
 import androidx.compose.material3.Icon
+import androidx.compose.ui.unit.dp
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -56,8 +65,36 @@ fun HomeScreen(navController: NavController){
             .padding(paddingValue)
             .background(MaterialTheme.colorScheme.background),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally){
-            Text(text = "Home")
+            horizontalAlignment = Alignment.CenterHorizontally
+        )
+        {
+//            Text(text = "Home")
+            Card(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 4.dp)
+                    .clickable {
+                    },
+                shape = MaterialTheme.shapes.small
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(imageVector = Icons.Default.Person , contentDescription ="Person Icon" )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(text = "Mahesh Bora", style = MaterialTheme.typography.bodyMedium)
+
+                    }
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(text = "This is a user card from Mahesh Bora. He is a software developer learning Kotlin and Jetpack Compose.", style = MaterialTheme.typography.bodySmall)
+
+                }
+
+            }
         }    }
 
 }

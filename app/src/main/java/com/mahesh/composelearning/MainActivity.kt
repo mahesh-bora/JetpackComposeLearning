@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Surface(tonalElevation = 5.dp) {
-                AppTheme(darkTheme = true) {
+                AppTheme(darkTheme = false) {
                     MainApp()
                 }
             }

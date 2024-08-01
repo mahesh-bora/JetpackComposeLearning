@@ -2,6 +2,7 @@ package com.mahesh.composelearning.routes
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -17,6 +18,7 @@ import com.mahesh.composelearning.screens.CartScreen
 import com.mahesh.composelearning.screens.HomeScreen
 import com.mahesh.composelearning.product.ProductScreen
 import com.mahesh.composelearning.screens.SettingScreen
+import com.mahesh.composelearning.viewmodel.SettingViewModel
 
 fun NavGraphBuilder.authGraph(navController: NavController){
     navigation(
@@ -49,7 +51,9 @@ fun NavGraphBuilder.mainGraph(navController: NavController){
             CartScreen(navController)
         }
         composable(route =  BottomBarScreen.Settings.route){
-            SettingScreen(navController)
+//            val viewModel = SettingViewModel()
+            val viewModel = viewModel<SettingViewModel>()
+            SettingScreen(navController, viewModel)
         }
     }
 
